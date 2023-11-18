@@ -1,32 +1,32 @@
+import { createSlice } from '@reduxjs/toolkit';
 const contacts = [
-  { id: 'id-1', name: 'Rosie Simpson', number: '459-12-56' },
-  { id: 'id-2', name: 'Hermione Kline', number: '443-89-12' },
-  { id: 'id-3', name: 'Eden Clements', number: '645-17-79' },
-  { id: 'id-4', name: 'Annie Copeland', number: '227-91-26' },
+  { id: 'id-1', name: 'Harry', number: '459-12-56' },
+  { id: 'id-2', name: 'Dumbledore', number: '443-89-12' },
+  { id: 'id-3', name: 'Voldemort', number: '645-17-79' },
+  { id: 'id-4', name: 'Snape', number: '227-91-26' },
+  { id: 'id-5', name: 'Hermione', number: '245-91-26' },
+  { id: 'id-6', name: 'Ron', number: '227-91-76' },
+  { id: 'id-7', name: 'Draco', number: '227-91-26' },
+  { id: 'id-8', name: 'Hagrid', number: '227-91-26' },
 ];
 
-// наш глобальний стейт
 const initialState = {
   contacts: JSON.parse(localStorage.getItem('contacts')) ?? contacts,
 };
 
-// функція редюсер яка змінює стейт або ініціалізує попередній
-export const contactsReducer = (state = initialState, action) => {
-  // action - {type: (придумуємо самі) contacts/deleteContact, payload: {зазвичай наше contactId }
-  // вся логіка прописується в редюсерах
-  switch (action.type) {
-    case 'contacts/addContact': {
-      return {
-        ...state,
-      contacts: [...state.contacts, action.payload]}
-    }
-    case 'contacts/deleteContact': {
-      return {
-        ...state,
-        contacts: state.contacts.filter(contact => contact.id !== action.payload),
-    }
-    }
-    default: return state;
+const contactsSlice = createSlice({
+  name: 'contacts',
+  initialState,
+  reducers: {
+    addContact(state, { payload }) {
+      state.contacts = [...state.contacts, payload];
+    },
+    deleteContact(state, { payload }) {
+      state.contacts = state.contacts.filter(contact => contact.id !== payload);
+    },
+  },
+});
 
-  }
-};
+
+export const { addContact, deleteContact } = contactsSlice.actions;
+export const contactsReducer = contactsSlice.reducer;
