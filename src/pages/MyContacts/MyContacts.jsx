@@ -1,25 +1,27 @@
 
-import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
+import { filterChangeState } from 'redux/Filter/filter.reducer';
 import { deleteContact } from 'redux/Contacts/contacts.reducer';
 import { StyledContactsList } from './Styled';
 import { ContactsList } from 'components/List/ContactsList';
 import { Filter } from 'components/Filter/Filter';
 
 const MyContacts = () => {
-  const [filter, setFilter] = useState('');
   const dispatch = useDispatch();
   const contacts = useSelector(state => state.contactsStore.contacts);
+  const filter = useSelector(state => state.filter);
 
   const handleFilterChangeState = newFilter => {
-    setFilter(newFilter);
+    dispatch(filterChangeState(newFilter));
   };
 
   const filteredContacts = () => {
-    return contacts.filter(contact =>
+    return (
+      contacts.filter(contact =>
       contact.name.toLowerCase().includes(filter.toLowerCase())
-    );
+    )
+    )
   };
 
   const handleDeleteContact = contactId => {
