@@ -1,7 +1,7 @@
 import { NavLink, Route, Routes } from 'react-router-dom';
 import CreateNewContact from 'pages/NewContact/CreateNewContact';
 import MyContacts from 'pages/MyContacts/MyContacts';
-import { StyledBook } from './Styled';
+import { StyledBook } from 'components/Styled';
 
 export const App = () => {
   return (
