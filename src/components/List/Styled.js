@@ -42,5 +42,6 @@ export const StyledList = styled.div`
     position: absolute;
     top: 25px;
     right: 40px;
+    cursor: pointer;
   }
 `;
