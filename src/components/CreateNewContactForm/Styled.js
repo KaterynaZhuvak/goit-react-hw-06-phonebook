@@ -81,6 +81,7 @@ export const StyledNewContactForm = styled.div`
     bottom: -30px;
     left: 50%;
     transform: translate(-50%, 0%);
+    cursor: pointer;
   }
 
   .button-add-contact:hover,
