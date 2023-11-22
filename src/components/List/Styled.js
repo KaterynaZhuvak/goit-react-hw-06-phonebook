@@ -44,4 +44,15 @@ export const StyledList = styled.div`
     right: 40px;
     cursor: pointer;
   }
+
+  .main-title {
+    color: #000;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 300;
+    line-height: normal;
+  }
+  .contacts-list {
+    padding: 0px;
+  }
 `;

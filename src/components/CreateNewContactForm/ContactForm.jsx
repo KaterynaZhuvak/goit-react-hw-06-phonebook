@@ -3,6 +3,11 @@ import * as yup from 'yup';
 import { StyledNewContactForm } from './Styled';
 import { ReactComponent as PersonSvg } from 'icons/person.svg';
 
+import { nanoid } from 'nanoid';
+import { useDispatch, useSelector } from 'react-redux';
+
+import { addContact } from 'redux/Contacts/contacts.reducer';
+
 const initialValues = {
   name: '',
   number: '',
@@ -13,7 +18,24 @@ const schema = yup.object().shape({
   number: yup.number().required(),
 });
 
-export const ContactForm = ({ handleAddContact }) => {
+export const ContactForm = () => {
+  const dispatch = useDispatch();
+  const contacts = useSelector(state => state.contactsStore.contacts);
+
+  const handleAddContact = contact => {
+    if (contacts.some(item => item.name === contact.name)) {
+      alert('Contact already exists');
+      return;
+    }
+
+    const newContact = {
+      ...contact,
+      id: nanoid(),
+    };
+
+    dispatch(addContact(newContact));
+  };
+
   const handleSubmit = (values, { resetForm }) => {
     handleAddContact(values);
     resetForm();
